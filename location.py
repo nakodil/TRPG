@@ -1,40 +1,13 @@
-import os
 from hero import Hero  # для создания противника на Арене
 
 
 class Location:
-    locations = dict()
-
-    @classmethod
-    def make_locations(cls):
-        Location(
-            id="хаб",
-            description="Вася Питонов приехал в Хаб.",
-            options={
-                "1": ("Сразиться с разбойником", "битва"),
-                "2": ("Заглянуть в лавку алхимика", "лавка"),
-                "3": ("Сыграть в кости", "кости"),
-                "0": ("Выйти в главное меню без сохранения", "меню")
-            }
-        )
-        Shop(
-            id="лавка",
-            description="Вася питонов приехал в лавку алхимика.",
-            options={
-                "1": ("Купить зелье за 10", "купить"),
-                "2": ("Вернуться в Хаб", "хаб"),
-                "0": ("Выйти в главное меню без сохранения", "меню")
-            }
-        )
-
     def __init__(self, id, description, options):
         self.id = id
         self.description = description
         self.options = options
-        Location.locations[self.id] = self
 
     def show(self):
-        os.system("cls")
         print("\n" + self.description)
         for key, value in self.options.items():
             print(f"{key} - {value[0]}")
@@ -52,9 +25,12 @@ class Location:
 
 
 class Shop(Location):
-    def init(self):
-        super().__init__()
+    def __init__(self, id, description, options):
+        self.id = id
+        self.description = description
+        self.options = options
         self.price = 10
+        self.options["1"] = ("Купить зелье", "купить")
 
     def buy(self, player):
         if player.money >= self.price:
@@ -90,3 +66,8 @@ class Arena(Location):
 
 class Casino(Location):
     pass
+
+
+if __name__ == "__main__":
+    hub = Location(id="1", description="desc", options={})
+    shop = Shop(id="2", description="desc", options={})

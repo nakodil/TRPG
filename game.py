@@ -1,6 +1,6 @@
 import os
 from hero import Hero
-from location import Location
+import location
 
 
 class Game:
@@ -19,7 +19,29 @@ class Game:
             defence=1,
             inventory=["меч", "конь"]
         )
-        Location.make_locations()
+
+        hub = location.Location(
+                id="хаб",
+                description="Вася Питонов приехал в Хаб.",
+                options={
+                    "1": ("Сразиться с разбойником", "битва"),
+                    "2": ("Заглянуть в лавку алхимика", "лавка"),
+                    "3": ("Сыграть в кости", "кости"),
+                    "0": ("Выйти в главное меню без сохранения", "меню")
+                }
+            )
+        shop = location.Shop(
+                id="лавка",
+                description="Вася питонов приехал в лавку алхимика.",
+                options={
+                    "2": ("Вернуться в Хаб", "хаб"),
+                    "0": ("Выйти в главное меню без сохранения", "меню")
+                }
+            )
+        self.locations = {
+            "хаб": hub,
+            "лавка": shop
+        } 
         self.main_loop()
 
     def main_loop(self):
@@ -29,7 +51,8 @@ class Game:
         """
         self.player.location_name = "хаб"
         while self.player.is_playing:
-            self.location = Location.locations[self.player.location_name]
+            os.system("cls")
+            self.location = self.locations[self.player.location_name]
             self.player.show()
             # в бою здесь нужно показать противника?
             self.location.show()
