@@ -1,4 +1,14 @@
+from item import Item
+
+
 class Hero:
+    """
+    TODO:
+        Определить repr!!!!
+        Инвентарь из Item()
+        Метод показа инвентаря
+        Как статы предметов меняют статы героя?
+    """
     def __init__(
         self,
         name="Безымянный",
@@ -8,10 +18,10 @@ class Hero:
         attack=1,
         defence=1,
         inventory=[],
-        location=None
+        location_name="хаб"
     ):
         self.is_playing = True
-        self.location_name = "хаб"
+        self.location_name = location_name
         self.name = name
         self.hp = hp
         self.xp = xp
@@ -19,7 +29,6 @@ class Hero:
         self.attack = attack
         self.defence = defence
         self.inventory = inventory
-    
 
     def show(self):
         print(f"{self.name}")
@@ -28,4 +37,13 @@ class Hero:
         print(f"деньги: {self.money}")
         print(f"атака: {self.attack}")
         print(f"защита: {self.defence}")
-        print(f"инвентарь: {self.inventory}")
+        self.show_inventory()
+
+    def show_inventory(self):
+        print("инвентарь: ", end="")
+        if self.inventory:
+            for item in self.inventory:
+                print(item.name, end=", ")
+        else:
+            print("пусто")
+        print("")

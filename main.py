@@ -20,7 +20,7 @@ class Menu:
 
             option = input("\nВведите номер варианта и нажмите ENTER: ")
             if option == "1":
-                game = Game()
+                Game()
             elif option == "2":  # DRY!
                 os.system("cls")
                 print("Загрузка игры не реализована")
