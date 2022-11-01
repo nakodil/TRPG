@@ -1,6 +1,3 @@
-from item import Item
-
-
 class Hero:
     """
     TODO:

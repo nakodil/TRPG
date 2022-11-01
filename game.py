@@ -8,15 +8,25 @@ class Game:
     def __init__(self):
         """
         Создает локации
-        Создает предметы
         Создает героя
         Запускает главный цикл игры
         """
 
+        # создаем игрока
+        self.player = Hero(
+            name="Вася Питонов",
+            hp=100,
+            xp=0,
+            money=500,
+            attack=2,
+            defence=1,
+            inventory=[Weapon(), Shield(), Potion()]
+        )
+
         # создаем локации
         hub = location.Location(
             id="хаб",
-            description="Вася Питонов приехал в Хаб.",
+            description=f"{self.player.name} приехал в Хаб.",
             options={
                 "1": ("Поехать на арену", "арена"),
                 "2": ("Заглянуть в лавку алхимика", "лавка"),
@@ -26,7 +36,7 @@ class Game:
         )
         shop = location.Shop(
             id="лавка",
-            description="Вася Питонов приехал в лавку алхимика.",
+            description=f"{self.player.name} приехал в лавку алхимика.",
             options={
                 "1": ("Купить зелье", "купить"),
                 "2": ("Вернуться в Хаб", "хаб"),
@@ -35,7 +45,7 @@ class Game:
         )
         arena = location.Arena(
             id="арена",
-            description="Вася Питонов приехал на арену.",
+            description=f"{self.player.name} приехал на арену.",
             options={
                 "1": ("Выйти на битву с разбойником", "бой"),
                 "2": ("Вернуться в Хаб", "хаб"),
@@ -49,22 +59,6 @@ class Game:
             "лавка": shop,
             "арена": arena
         }
-
-        # создаем предметы
-        sword = Weapon()
-        shield = Shield()
-        potion = Potion()
-
-        # создаем игрока
-        self.player = Hero(
-            name="Вася Питонов",
-            hp=100,
-            xp=0,
-            money=500,
-            attack=2,
-            defence=1,
-            inventory=[sword, shield, potion]
-        )
 
         # запускаем главный цикл игры
         self.main_loop()
