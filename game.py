@@ -25,8 +25,9 @@ class Inventory:
         else:
             print("пусто")
 
-    def get_filtered_by_class(self, *filters):
-        [item for item in self.items if isinstance(item, Consumable())]
+    def filter_by_class(self, *filters):
+        filtered_items = [item for item in self.items if isinstance(item, Consumable)]
+        print(*filtered_items)
 
 
 class Weapon(Item):
@@ -106,7 +107,10 @@ system("cls")
 player.show()
 
 input("\nНажмите ENTER чтобы употребить предмет 0")
-
 system("cls")
 player.consume_item(0)
 player.show()
+
+input("\nНажмите ENTER чтобы показать все зелья в инвентаре")
+system("cls")
+player.inventory.filter_by_class(Weapon)
